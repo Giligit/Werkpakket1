@@ -66,7 +66,36 @@ class PDOEventRepository
 
     public function createEvent($events)
     {
-        $id =$events['id'];
+        $id =$events['id']; // nog kijken wat hiermee moet gebeuren.
         $name= $events['name'];
+        $startDate = $events['startDate'];
+        $endDate = $events['endDate'];
+        $person = $events['person'];
+        $stmt = $this->pdo->prepare("INSERT INTO events (name, startDate, endDate, person)VALUES (:name, :startDate, :endDate, :person)");
+        $stmt->bindParam(':name', $name);
+        $stmt->bindParam(':startDate', $startDate);
+        $stmt->bindParam(':endDate', $endDate);
+        $stmt->bindParam(':person', $person);
+        exec($stmt);
+    }
+    public function editEvent($events)
+    {
+        $id = events['id'];
+        $name = $events['name'];
+        $startDate = $events['startDate'];
+        $endDate = $events['endDate'];
+        $person = $events['person'];
+        $this -> findEventByID($id);
+        $stmt->bindParam(':name', $name);
+        $stmt->bindParam(':startDate', $startDate);
+        $stmt->bindParam(':endDate', $endDate);
+        $stmt->bindParam(':person', $person);
+        exec($stmt);
+    }
+    public function deleteEventById($id)
+    {
+        $this->findEventByID($id);
+        $stmt = $this->pdo->prepare("DELETE FROM events WHERE id = :id");
+        exec($stmt);
     }
 }
