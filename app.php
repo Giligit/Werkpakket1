@@ -1,4 +1,11 @@
 <?php
+include'src\repository\PDOPersonRepository.php';
+include'src\repository\PDOEventRepository.php';
+include'src\view\view.php';
+include'src\view\PersonJsonView.php';
+include'src\view\EventJsonView.php';
+include'src\controller\PersonController.php';
+include'vendor\altorouter\altorouter\AltoRouter.php';
 
 
 use repository\PDOPersonRepository;
@@ -6,6 +13,9 @@ use repository\PDOEventRepository;
 use view\PersonJsonView;
 use view\EventJsonView;
 use controller\PersonController;
+
+
+
 
 $user = 'root';
 $password = '';
