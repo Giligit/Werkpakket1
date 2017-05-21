@@ -1,18 +1,19 @@
 <?php
 
-require_once 'src/autoload.php';
-use \repository\PDOPersonRepository;
-use \repository\PDOEventRepository;
-use \view\PersonJsonView;
-use \controller\PersonController;
 
-$user = 'dario';
-$password = 'Test123';
+use repository\PDOPersonRepository;
+use repository\PDOEventRepository;
+use view\PersonJsonView;
+use view\EventJsonView;
+use controller\PersonController;
+
+$user = 'root';
+$password = '';
 $database = 'wp1';
 $pdo = null;
 
 try {
-    $pdo = new PDO("mysql:host=localhost;dbname=$database",
+    $pdo = new PDO("mysql:host=127.0.0.1;dbname=wp1",
         $user, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE,
         PDO::ERRMODE_EXCEPTION);
@@ -20,9 +21,10 @@ try {
     $personPDORepository = new PDOPersonRepository($pdo);
     $personJsonView = new PersonJsonView();
     $personController = new PersonController($personPDORepository, $personJsonView);
-    $eventPDORepository = new \repository\PDOEventRepository($pdo);
-    $eventJSonView = new \view\EventJsonView();
-    $eventController = new \controller\EventController($eventJSonView, $eventPDORepository);
+    $eventPDORepository = new PDOEventRepository($pdo);
+    $eventJSonView = new EventJsonView();
+    $eventController = new EventJsonView($eventJSonView, $eventPDORepository);
+
     $router = new AltoRouter();
     $router->setBasePath('/~user/Web-Project/api');
 
@@ -40,4 +42,6 @@ try {
 
 } catch (Exception $e) {
     echo 'cannot connect to database';
+    echo $e;
 }
+?>

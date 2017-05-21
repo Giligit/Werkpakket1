@@ -3,7 +3,7 @@
 use \model\Person;
 use \controller\PersonController;
 
-
+require_once 'vendor/autoload.php';
 
 class PersonControllerTest extends PHPUnit_Framework_TestCase
 {
