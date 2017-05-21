@@ -6,11 +6,13 @@ class Person
 {
     private $id;
     private $name;
+    private $person_email;
 
-    public function __construct($id, $name)
+    public function __construct($id, $name, $person_email)
     {
         $this->id = $id;
         $this->name = $name;
+        $this->person_email = $person_email;
     }
 
     public function getId()
@@ -28,12 +30,21 @@ class Person
         return $this->name;
     }
 
-    public function jsonSerialize()
+    /**
+     * @return mixed
+     */
+    public function getPersonEmail()
     {
-        return [
-            'person_id' => $this->id,
-            'person_name' => $this->name
-        ];
+        return $this->person_email;
     }
+
+    /**
+     * @param mixed $person_email
+     */
+    public function setPersonEmail($person_email)
+    {
+        $this->person_email = $person_email;
+    }
+
 
 }

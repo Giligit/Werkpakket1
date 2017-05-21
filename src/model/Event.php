@@ -12,7 +12,7 @@ namespace model;
 class Event
 {
 
-    private $id, $name, $person, $date;
+    private $id, $name, $person, $start, $end;
 
     /**
      * @return mixed
@@ -65,18 +65,35 @@ class Event
     /**
      * @return mixed
      */
-    public function getDate()
+    public function getStart()
     {
-        return $this->date;
+        return $this->start;
     }
 
     /**
-     * @param mixed $date
+     * @param mixed $start
      */
-    public function setDate($date)
+    public function setStart($start)
     {
-        $this->date = $date;
+        $this->start = $start;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getEnd()
+    {
+        return $this->end;
+    }
+
+    /**
+     * @param mixed $end
+     */
+    public function setEnd($end)
+    {
+        $this->end = $end;
+    }
+
 
 
 

@@ -21,7 +21,7 @@ class PDOPersonRepository
             $results = $statement->fetchAll(\PDO::FETCH_ASSOC);
 
             if (count($results) > 0) {
-                return new Person($results[0]['id'], $results[0]['name']);
+                return new Person($results[0]['id'], $results[0]['name'],$results[0]['person_email']);
             } else {
                 return null;
             }
@@ -39,7 +39,7 @@ class PDOPersonRepository
             $statement->setFetchMode(\PDO::FETCH_ASSOC);
             $results = $statement->fetchAll(\PDO::FETCH_ASSOC);
             foreach ($results as $person) {
-                $persons[] = new Person($person['id'], $person['name']);
+                $persons[] = new Person($person['id'], $person['name'], $person['e-mail']);
             }
             return $persons;
         } catch (\Exception $exception) {

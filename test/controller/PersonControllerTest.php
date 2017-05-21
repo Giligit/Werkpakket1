@@ -3,6 +3,8 @@
 use \model\Person;
 use \controller\PersonController;
 
+
+
 class PersonControllerTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
@@ -54,8 +56,8 @@ class PersonControllerTest extends PHPUnit_Framework_TestCase
 
     public function testHandleFindPersons_personsFound_stringWithIdName()
     {
-        $person1 = new Person(1, 'testperson1');
-        $person2 = new Person(2, 'testperson2');
+        $person1 = new Person(1, 'testperson1','TEST@test.com');
+        $person2 = new Person(2, 'testperson2','TEST@test.com');
         $persons = [$person1, $person2];
         $this->mockPersonRepository->expects($this->atLeastOnce())
             ->method('findPersons')

@@ -8,41 +8,47 @@
 
 namespace controller;
 
+use repository\PDOEventRepository;
+use view\EventJsonView;
 
 class EventController
 {
     private $eventView, $eventRepository;
 
-    public function __construct($eventView, $eventRepository)
+    public function __construct(EventJsonView $eventView,PDOEventRepository $eventRepository)
     {
         $this->eventView = $eventView;
         $this->pdoEventRepository = $eventRepository;
     }
 
-    public function handleFindEventById($id)
+    public function findEventByID($id)
     {
-        $event = $this -> eventRepository ->handleFindEventById($id);
+        $event = $this -> eventRepository ->findEventByID($id);
         return $this->eventView->convertEventArrayToJson($event);
     }
 
-    public function handleFindEvents()
+    public function findEventsList()
     {
-        $events = $this -> eventRepository -> handleFindEvents();
+        $events = $this -> eventRepository ->findEventsList();
         return $this->eventView->convertEventArrayToJson($events);
     }
-
-    public function handleCreateEvent($events)
-    {
-        $this->eventRepository->handleCreateEvent($events);
-
-    }
-    public function handleEditEvent($events)
-    {
-        $this->eventRepository->handleEditEvent($events);
+    public function findEventsByPerson($person){
+        $eventArray = $this->pdoEventRepository->findEventsByPerson($person);
+        return $this-> eventView->convertEventArrayToJson($eventArray);
     }
 
-    public function handleDeleteEventById($id)
+    public function createEvent($events)
     {
-        $this->pdoEventRepository->handleDeleteEventById($id);
+        $this->eventRepository->createEvent($events);
+
+    }
+    public function editEvent($events)
+    {
+        $this->eventRepository->editEvent($events);
+    }
+
+    public function deleteEventById($id)
+    {
+        $this->pdoEventRepository->deleteEventById($id);
     }
 }

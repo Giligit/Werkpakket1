@@ -6,8 +6,8 @@ use \repository\PDOEventRepository;
 use \view\PersonJsonView;
 use \controller\PersonController;
 
-$user = 'root';
-$password = null;
+$user = 'dario';
+$password = 'Test123';
 $database = 'wp1';
 $pdo = null;
 
