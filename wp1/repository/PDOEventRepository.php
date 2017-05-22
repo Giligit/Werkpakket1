@@ -32,7 +32,7 @@ class PDOEventRepository implements eventRepository
             $arrayResults = null;
             if(count($results) > 0) {
                 foreach ($results as $event) {
-                    array_push($arrayResults, new Event($event['id'], $event['name'], $event['startDate'], $event['endDate'], $event['person']));
+                    array_push($arrayResults, new Event($event['eventID'], $event['eventNaam'], $event['eventStart'], $event['eventEnd'], $event['contactPersoon']));
                 }
                 return $arrayResults;
             }else{
@@ -54,7 +54,7 @@ class PDOEventRepository implements eventRepository
 
 
             if (count($results) > 0) {
-                return new Event($results[0]['id'], $results[0]['name'], $results[0]['startDate'], $results[0]['endDate'], $results[0]['person']);
+                return new Event($results[0]['eventID'], $results[0]['eventNaam'], $results[0]['eventStart'], $results[0]['eventEnd'], $results[0]['contactPersoon']);
 
             } else {
                 return null;
@@ -75,7 +75,7 @@ class PDOEventRepository implements eventRepository
 
             if(count($results) > 0) {
                 foreach($results as $event) {
-                    array_push($arrayResults, new Event($event['id'],$event['name'], $event['startDate'], $event['endDate'],$event['person']));
+                    array_push($arrayResults, new Event($event['eventID'],$event['eventNaam'], $event['eventStart'], $event['eventEnd'],$event['contactPersoon']));
 
                 }
                 return $arrayResults;
@@ -88,7 +88,7 @@ class PDOEventRepository implements eventRepository
     public function findEventByDate($startDate, $endDate)
     {
         try {
-            $statement = $this->connection->prepare('SELECT * FROM Events WHERE startDate = ? AND endDate = ?');
+            $statement = $this->connection->prepare('SELECT * FROM Events WHERE eventStart = ? AND  eventEnd = ?');
             $statement->bindParam(1, $startDate, \PDO::PARAM_STR);
             $statement->bindParam(2, $endDate, \PDO::PARAM_STR);
             $statement->execute();
@@ -98,7 +98,7 @@ class PDOEventRepository implements eventRepository
 
             if (count($results) > 0) {
                 foreach ($results as $event) {
-                    array_push($arrayResults, new Event($event['id'], $event['name'], $event['startDate'], $event['endDate'], $event['person']));
+                    array_push($arrayResults, new Event($event['eventID'], $event['eventNaam'], $event['eventStart'], $event['eventEnd'], $event['contactPersoon']));
                 }
                 return $arrayResults;
             } else {
@@ -112,7 +112,7 @@ class PDOEventRepository implements eventRepository
     public function findEventByPersonAndDate($personId, $startDate, $endDate)
     {
         try {
-            $statement = $this->connection->prepare('SELECT * FROM Events WHERE startDate = ? AND endDate = ? AND contactPersoon = ?');
+            $statement = $this->connection->prepare('SELECT * FROM Events WHERE eventStart = ? AND eventEnd = ? AND contactPersoon = ?');
             $statement->bindParam(1, $startDate, \PDO::PARAM_STR);
             $statement->bindParam(2, $endDate, \PDO::PARAM_STR);
             $statement->bindParam(3, $personId, \PDO::PARAM_INT);
@@ -123,7 +123,7 @@ class PDOEventRepository implements eventRepository
 
             if (count($results) > 0) {
                 foreach ($results as $event) {
-                    array_push($arrayResults, new Event($event['id'], $event['name'], $event['startDate'], $event['endDate'], $event['person']));
+                    array_push($arrayResults, new Event($event['EventID'], $event['eventNaam'], $event['eventStart'], $event['eventEnd'], $event['contactPersoon']));
                 }
                 return $arrayResults;
             } else {
@@ -142,7 +142,7 @@ class PDOEventRepository implements eventRepository
         $event->setPerson(str_replace('%20', ' ', $event->getPerson()));
 
         try {
-            $statement = $this->connection->prepare('INSERT INTO Events(name, startDate, endDate, Person) VALUES (?, ?, ?, ?, ?, ?, ?)');
+            $statement = $this->connection->prepare('INSERT INTO Events(eventNaam, eventStart, eventEnd, contactPersoon) VALUES (?, ?, ?, ?, ?, ?, ?)');
             $statement->bindParam(1, $event->getName(), \PDO::PARAM_STR);
             $statement->bindParam(2, $event->getStartDate(), \PDO::PARAM_STR);
             $statement->bindParam(3, $event->getEndDate(), \PDO::PARAM_STR);

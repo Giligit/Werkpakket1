@@ -31,7 +31,7 @@ try {
 
     $router = new AltoRouter();
 
-    $router->setBasePath('/api/wp1');
+    $router->setBasePath('/api');
 
     $router->map('GET','/event/[i:id]',
         function($id) use (&$eventController) {
