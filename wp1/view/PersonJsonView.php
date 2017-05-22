@@ -14,7 +14,6 @@ class PersonJsonView implements View
 
     public function show(array $data)
     {
-        // TODO: Implement show() method.
         header('Content-Type: application/json');
 
         if(isset($data['person'])) {
