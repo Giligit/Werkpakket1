@@ -1,0 +1,14 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /~user/Web-Advanced-Project/api
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ App.php?/$1 [L]
+    RewriteEngine On
+</IfModule>
+<IfModule !mod_rewrite.c>
+    ErrorDocument 404 /404.php
+</IfModule>
+<Limit PUT DELETE GET POST>
+    Require all granted
+</Limit>
