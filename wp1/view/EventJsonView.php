@@ -7,7 +7,7 @@
  */
 
 namespace View;
-
+include 'View.php';
 
 class EventJsonView implements View
 {

@@ -6,6 +6,11 @@
  * Time: 20:03
  */
 require_once "vendor/autoload.php";
+include 'repository\PDOEventRepository.php';
+include 'view\EventJsonView.php';
+include 'controller\EventController.php';
+include 'model\event.php';
+
 use \repository\PDOEventRepository;
 use \view\EventJsonView;
 use \controller\EventController;

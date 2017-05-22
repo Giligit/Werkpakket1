@@ -7,6 +7,7 @@
  */
 
 namespace repository;
+include 'PersonRepository.php';
 
 
 use model\Person;
